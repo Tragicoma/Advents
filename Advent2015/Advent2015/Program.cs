@@ -10,10 +10,44 @@ namespace Advent2015
         static void Main(string[] args)
         {
             //Task1();
-            Task2();
+            //Task2();
+            Task3();
         }
 
-        
+        static void Task3()
+        {
+            string filePath = @"D:\Jauna mape\C#_Maaciibas\Advente\Advents\Advent2015\input_bultinas.txt";
+            string bultinas = File.ReadAllText(filePath);
+            int x = 0, y = 0;
+            List<string> coordinates = new List<string>();
+
+
+            foreach(char ch in bultinas)
+            {
+                if (ch == '>')
+                    x++;
+                else if (ch == '<')
+                    x--;
+                else if (ch == '^')
+                    y++;
+                else if (ch == 'v')
+                    y--;
+
+                coordinates.Add(x + ", " + y);
+               
+            }
+
+            IEnumerable<string> uniqueHauses = coordinates.Distinct();
+            List<string> unique = new List<string>();
+            unique = uniqueHauses.ToList();
+
+            Console.WriteLine("Number of houses Santa visited: " + coordinates.Count +1);
+            Console.WriteLine("Number of UNIQUE houses Santa visited: " + unique.Count +1);
+            Console.WriteLine("___________");
+            Console.WriteLine("x: " + x);
+            Console.WriteLine("y: " + y);
+        }
+
         static void Task2()
         {
             string fp = @"D:\Jauna mape\C#_Maaciibas\Advente\Advents\Advent2015\box_dimensions.txt";
@@ -41,7 +75,6 @@ namespace Advent2015
                 usables = parameters.ToList();
                 usables.Remove(longest);
                 int ribbon = 2 * usables[0] + 2 *usables[1];
-                Console.WriteLine("Ribbon: " + ribbon);
                 int[] sides = {a*b,b*c,c*a};
                 int smallest = sides.Min();
                 int boxTotal = (2*a*b + 2*b*c + 2*a*c) + smallest ;
